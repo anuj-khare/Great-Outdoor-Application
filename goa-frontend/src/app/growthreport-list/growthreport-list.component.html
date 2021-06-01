@@ -1,0 +1,38 @@
+<h3>Growth List</h3>
+
+<app-msg-box *ngIf="!err && !growth">
+    <strong>loading....please wait..</strong>
+</app-msg-box>
+<app-msg-box *ngIf="err " [isError] ="true">
+    <strong>{{ err }}</strong>
+</app-msg-box>
+
+<table class="table table-bordered table-hover table-success table-striped" *ngIf="growth">
+    <thead>
+        <tr>
+            <th (click) = "sort('growthReportId')">GrowthReport Id &nbsp;<i class="fa fa-sort"></i></th>
+            <th (click) = "sort('currentdate')">Current Date &nbsp;<i class="fa fa-sort"></i></th>
+            <th (click) = "sort('revenue')">Revenue &nbsp;<i class="fa fa-sort"></i></th>
+            <th (click) = "sort('amountChange')">Amount Change&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click) = "sort('percentageGrowth')">Percentage Growth&nbsp;<i class="fa fa-sort"></i></th>
+            <th >Color Code</th>
+            <th >Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let e of growth | orderBy: key: reverse | paginate:{itemsPerPage:10, currentPage:p}">
+            <td>{{ e.growthReportId }} </td>
+            <td>{{ e.currentdate }} </td>
+            <td>{{ e.revenue }} </td>
+            <td>{{ e.amountChange }} </td>
+            <td>{{ e.percentageGrowth }} </td>
+            <td>{{ e.colorCode }} </td>
+            <td><button class="btn btn-sm btn-danger" (click)="delete(e.growthReportId)">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+<div class="container">
+    <div align="center">
+<button class="btn btn-lg btn-danger"   (click)="deleteall() "  >Delete All Growth Report</button><br><br>
+</div>
+</div>

@@ -1,0 +1,49 @@
+<div class="col-sm-6 mx-auto">
+    <h3 align="center"> New User</h3>
+<app-msg-box msgType="Info" *ngIf="infoMsg">
+        <strong>{{infoMsg}}</strong>
+</app-msg-box>
+
+<app-msg-box msgType="Error" *ngIf="errMsg">
+        <strong>{{errMsg}}</strong>
+</app-msg-box>
+<form class="form" [formGroup]="userForm" (ngSubmit)="handleSubmit()">
+        <div class="form-group">
+            <label class="form-control-label">User Id:</label>
+            <input type="number" formControlName="userId" class="form-control"  />
+            <div class="alert alert-danger" *ngIf="userIdfc.invalid && (userIdfc.touched || userIdfc.dirty)">
+                <span *ngIf="userIdfc.errors.required">This field is mandatory</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">User Name:</label>
+            <input type="text" formControlName="userName"  class="form-control" />
+            <div class="alert alert-danger" *ngIf="userNamefc.invalid && (userNamefc.touched || userNamefc.dirty)">
+                <span *ngIf="userNamefc.errors.required">This field is mandatory</span>
+                <span *ngIf="userNamefc.errors.minLength">Name must contain 4 characters</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" >User Type :</label>
+            <select formControlName="userType"  class="form-control" >
+                <option  disabled selected>Please Choose...</option>
+                <option value="ADMIN">ADMIN</option>
+                <option value="USER">USER</option>
+            </select>
+            <div class="alert alert-danger" *ngIf="userTypefc.invalid && (userTypefc.touched || userTypefc.dirty)">
+                <span *ngIf="userTypefc.errors.required">Please choose any one option </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">User Password:</label>
+            <input type="password" formControlName="userPassword"   class="form-control" />
+            <div class="alert alert-danger" *ngIf="this.userPasswordfc.invalid && (this.userPasswordfc.touched || this.userPasswordfc.dirty)">
+                <span *ngIf="userPasswordfc.errors.required">This field is mandatory</span>
+                <span *ngIf="userPasswordfc.errors.minLength">Password must contain atleast 4 characters</span>
+            </div>
+        </div>
+               <button class="btn btn-block btn-primary" [disabled]="userForm.invalid">
+            Create
+        </button>
+    </form>
+</div>

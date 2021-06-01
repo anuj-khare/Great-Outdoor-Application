@@ -1,0 +1,87 @@
+<!-- <br><br><br><br><br>
+<section class="container p-4 center-screen">
+
+    <app-msg-box msgType="Info" *ngIf="infoMsg">
+      <strong>{{infoMsg}}</strong>
+    </app-msg-box>
+
+    <app-msg-box msgType="Error" *ngIf="errMsg">
+      <strong>{{errMsg}}</strong>
+    </app-msg-box>
+
+         <div class="col-sm-4 mx-auto mt-5">
+      <form #f="ngForm" (ngSubmit)="handleSubmit()" >
+        <div class="input-group col mx-auto"><br>
+            USER ID:&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" class="form-control" placeholder="Enter your userId" [(ngModel)]="userId" name="mno"
+            required />
+        </div >
+        <br>
+            <div class="input-group"><br>
+             PASSWORD: &nbsp; <input type="password" class="form-control" placeholder="Enter your password" [(ngModel)]="userPassword" name="mno"
+            required />
+        </div >
+        <br>
+        <br>
+          <div class="input-group-append "><br><br>
+            <button  class="btn btn-success " type="submit"  [disabled]="f.invalid" >
+              Sign In
+            </button>
+          </div>
+      </form>
+    </div>
+
+
+    <router-outlet></router-outlet>
+    <button type="button"  class="btn btn-secondary" routerLink="/applogin">BACK</button>
+  </section>
+ -->
+ <body>
+  <app-msg-box msgType="Info" *ngIf="infoMsg">
+    <strong>{{infoMsg}}</strong>
+  </app-msg-box>
+
+  <app-msg-box msgType="Error" *ngIf="errMsg">
+    <strong>{{errMsg}}</strong>
+  </app-msg-box>
+  <div class="signin">
+    <div class="back-img">
+      <div class="sign-in-text">
+        <h2  class="active">Sign in</h2>
+        <h2 type="button" class="active" routerLink="/adduser">Sign Up</h2>
+      </div>
+      <div class="layer">
+      </div>
+      <p class="point">&#9650;</p>
+    </div>
+    <div class="form-section">
+
+      <form  class="form" [formGroup]="loginForm" (ngSubmit)="handleSubmit()">
+          <small class="text-danger">{{ infoMsg }}</small>
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" class="form-group">
+
+          <input class="mdl-textfield__input" type="text" formControlName="userId" class="form-control" placeholder="User Id" >
+          <div class="alert alert-danger" *ngIf="userIdfc.invalid && (userIdfc.touched || userIdfc.dirty)">
+              <span class="mdl-textfield__error" *ngIf="userIdfc.errors.pattern">This field should be valid</span>
+          </div>
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" class="form-group">
+
+          <input  class="mdl-textfield__input" type="password" formControlName="userPassword" class="form-control" placeholder="User Password">
+          <div class="alert alert-danger" *ngIf="userPasswordfc.invalid && (userPasswordfc.touched || userPasswordfc.dirty)">
+              <span  *ngIf="userPasswordfc.errors.pattern">This field should be valid</span>
+          </div>
+        </div>
+        <br/>
+
+    <!--/.form-section-->
+
+    <button id="loginButton"  class="sign-in-btn mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored" class="btn btn-block btn-primary"  [disabled]="loginForm.invalid">
+      Login
+    </button><!--/button-->
+  </form>
+    </div>
+
+ </div><!--/.signin-->
+</body>

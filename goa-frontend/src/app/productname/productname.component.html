@@ -1,0 +1,51 @@
+<br>
+<section align="center" (click)="handleSubmit()">
+   <label type="text">Search :&nbsp;</label>
+   <select type="submit" class="btn btn-info" placeholder="Choose the category" [(ngModel)]="productname" >
+   <option  disabled selected>Please Choose...</option>
+   <option value="Cello">Cello</option>
+   <option value="Jug">Jug</option>
+   <option value="Earbud">Earbud</option>
+   <option value="S9plus">S9plus</option>
+   <option value="Cooler">Cooler</option>
+   <option value="Oximeter">Oximeter</option>
+   <option value="Handwash">Handwash</option>
+   <option value="Silk">Silk</option>
+  </select>
+  </section>
+  <br>
+   <section  align="center" >
+     <table class="table table-bordered table-hover table-success table-striped" *ngIf="productname && product">
+       <thead>
+           <tr>
+               <th>Product ID</th>
+               <th>Product Name</th>
+               <th>Price</th>
+               <th>Image</th>
+               <th>Color</th>
+               <th>Category</th>
+               <th>Quantity</th>
+               <th>Manufacturer</th>
+               <th>Specification</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr *ngFor="let e of product">
+               <td>{{ e.productId}} </td>
+               <td>{{ e.productName }} </td>
+               <td>{{ e.price }} </td>
+               <td>{{ e.image }} </td>
+               <td>{{ e.color }} </td>
+               <td>{{ e.category }} </td>
+               <td>{{ e.quantity }} </td>
+               <td>{{ e.manufacturer }} </td>
+               <td>{{ e.specification }} </td>
+               </tr>
+
+  </tbody>
+     </table>
+   </section>
+   <section align="center" *ngIf="search1" align="center">
+     <h3> Invalid Product Category</h3>
+   </section>
+   <button type="button"  class="btn btn-primary" routerLink="/dashboard/product/productlist">BACK</button>

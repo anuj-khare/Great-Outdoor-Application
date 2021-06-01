@@ -1,0 +1,40 @@
+<h3>Product List</h3>
+<app-msg-box *ngIf="!err && !product">
+    <strong>loading....please wait..</strong>
+</app-msg-box>
+<app-msg-box *ngIf="err " [isError] ="true">
+    <strong>{{ err }}</strong>
+</app-msg-box>
+
+<table class="table table-bordered table-hover table-success table-striped" *ngIf="product">
+    <thead>
+        <tr>
+            <th (click) = "sort('productId')">Product ID&nbsp;<i class="fa fa-sort"></i></th>
+            <th> Product Name</th>
+            <th (click) = "sort('price')">Price&nbsp;<i class="fa fa-sort"></i></th>
+            <th>Image</th>
+            <th>Color</th>
+            <th>Category</th>
+            <th (click) = "sort('quantity')">Quantity&nbsp;<i class="fa fa-sort"></i></th>
+            <th>Manufacturer</th>
+            <th>Specification</th>
+            <th colspan="2">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of product | orderBy: key: reverse | paginate:{itemsPerPage:10, currentPage:p}">
+            <td>{{ p.productId}} </td>
+            <td>{{ p.productName }} </td>
+            <td>{{ p.price }} </td>
+            <td>{{ p.image }} </td>
+            <td>{{ p.color }} </td>
+            <td>{{ p.category }} </td>
+            <td>{{ p.quantity }} </td>
+            <td>{{ p.manufacturer }} </td>
+            <td>{{ p.specification }} </td>
+            <!-- <td><button class="btn btn-sm btn-danger" (click)="delete(e.productId)">Delete</button></td> -->
+            <td><a class="btn btn-sm btn-secondary" routerLink="/dashboard/product/productedit/{{p.productId}}">Add To Cart</a></td>
+            <td><a class="btn btn-sm btn-secondary" routerLink="/dashboard/product/producttoorder/{{p.productId}}">Order Now</a></td>
+        </tr>
+    </tbody>
+</table>

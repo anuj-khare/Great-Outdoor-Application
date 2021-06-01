@@ -1,0 +1,62 @@
+<div class="col-sm-6 mx-auto">
+    <!-- <h3>{{ isEditing ? "Edit" : "New"}} Cart</h3> -->
+
+    
+    <app-msg-box msgType="Info" *ngIf="infoMsg">
+        <strong>{{infoMsg}}</strong>
+      </app-msg-box>
+    
+      <app-msg-box msgType="Error" *ngIf="errMsg">
+        <strong>{{errMsg}}</strong>
+      </app-msg-box>
+
+
+
+
+     <form class="form" [formGroup]="productForm" >
+        <div class="form-group">
+            <label class="form-control-label">Product Id :</label>
+            <input type="number" formControlName="productId" class="form-control"  />
+        </div>
+        </form>
+
+
+        <form class="form" [formGroup]="orderForm" (ngSubmit)="handleSubmit()">
+            <div class="form-group">
+                <label class="form-control-label">user Id:</label>
+                <input type="number" formControlName="userId" class="form-control"  />
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Total Quantity:</label>
+                <input type="number" formControlName="totalQuantity" class="form-control" />
+                <div class="alert alert-danger" *ngIf="this.totalQuantityfc.invalid && (this.totalQuantityfc.touched || this.totalQuantityfc.dirty)">
+                    <span *ngIf="totalQuantityfc.errors.required">This field is mandate</span>
+                    <span *ngIf="totalQuantityfc.errors.minLength">Minimum 3 characters expected</span>
+                </div>
+            </div>
+         
+        <button class="btn btn-block btn-primary"[disabled]="orderForm.invalid" >
+          Save
+      </button>
+              
+        </form>
+
+        
+        <!-- <form class="form" [formGroup]="orderForm" (ngSubmit)="handleSubmit()">
+            <div class="form-group">
+                <label class="form-control-label">Order Id:</label>
+                <input type="number" formControlName="orderId" class="form-control"  />
+            </div>
+            <div class="form-group">
+                <label class="form-control-label">Total Quantity:</label>
+                <input type="number" formControlName="totalQuantity" class="form-control" />
+                <div class="alert alert-danger" *ngIf="this.totalQuantityfc.invalid && (this.totalQuantityfc.touched || this.totalQuantityfc.dirty)">
+                    <span *ngIf="totalQuantityfc.errors.required">This field is mandate</span>
+                    <span *ngIf="totalQuantityfc.errors.minLength">Minimum 3 characters expected</span>
+            </div>
+            <button class="btn btn-block btn-primary"[disabled]="orderForm.invalid" >
+                Save
+            </button>
+                    
+              </form> -->
+          </div>       

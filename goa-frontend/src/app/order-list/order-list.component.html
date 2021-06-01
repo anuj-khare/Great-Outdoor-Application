@@ -1,0 +1,43 @@
+<h3>Order List</h3>
+<app-msg-box *ngIf="!err && !order">
+    <strong>loading ... please wait ...</strong>
+</app-msg-box>
+
+<app-msg-box *ngIf="err" [isError]="true">
+    <strong>{{ err }} </strong>
+</app-msg-box>
+<section *ngIf="order">
+<table class="table table-bordered table-hover table-success table-striped" >
+    <thead>
+        <tr>
+            <th (click) = "sort('orderId')">OrderId&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click) = "sort('userId')">UserId&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click) = "sort('productId')">ProductId&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click) = "sort('totalPrice')">Total Price&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click) = "sort('totalQuantity')">Total Quantity&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click) = "sort('dispatchDate')">Dispatch Date&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click) = "sort('deliveryDate')">Delivery Date&nbsp;<i class="fa fa-sort"></i></th>
+            <th colspan="2">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let o of order | orderBy: key: reverse | paginate:{itemsPerPage:10, currentPage:p}">
+            <td>{{ o.orderId }} </td>
+            <td >{{ o.userId  }} </td>
+            <td>{{o.productId}}</td>
+            <td>{{ o.totalPrice }} </td>
+            <td>{{ o.totalQuantity }} </td>
+            <td>{{ o.dispatchDate }} </td>
+            <td>{{ o.deliveryDate }} </td>
+            <td><button class="btn btn-sm btn-danger" (click)="delete(o.orderId)">Delete</button></td>
+            <td><a class="btn btn-sm btn-info" routerLink="/dashboard/order/orderedit/{{o.orderId}}">Edit</a></td>
+
+        </tr>
+    </tbody>
+</table>
+<div class="container">
+    <div align="center">
+<button class="btn btn-lg btn-danger "   (click)="deleteall() "  >Delete All</button><br><br>
+</div>
+</div>
+</section>

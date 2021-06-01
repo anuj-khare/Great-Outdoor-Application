@@ -1,0 +1,56 @@
+<div class="col-sm-6 mx-auto">
+     <form class="form" [formGroup]="orderForm" (ngSubmit)="handleSubmit()">
+         <div class="form-group">
+             <label class="form-control-label">Order Id:</label>
+             <input type="number" formControlName="orderId" class="form-control"  />
+         </div>
+         <div class="form-group">
+             <label class="form-control-label">User Id:</label>
+             <input type="text" formControlName="userId" class="form-control" />
+             <div class="alert alert-danger" *ngIf="userIdfc.invalid && (userIdfc.touched || userIdfc.dirty)">
+                 <span *ngIf="userIdfc.errors.required">This field is mandate</span>
+                 <span *ngIf="userIdfc.errors.minLength">Minimum 3 characters expected</span>
+          </div>
+        </div>
+         <div class="form-group">
+            <label class="form-control-label">Product Id:</label>
+            <input type="text" formControlName="productId" class="form-control" />
+            </div>
+         <div class="form-group">
+             <label class="form-control-label">Total Price :</label>
+             <input type="number" formControlName="totalPrice" class="form-control" />
+             <div class="alert alert-danger" *ngIf="totalPricefc.invalid && (totalPricefc.touched || totalPricefc.dirty)">
+                 <span *ngIf="totalPricefc.errors.required">This field is mandate</span>
+                 <span *ngIf="totalPricefc.errors.minLength">Minimum 3 characters expected</span>
+             </div>
+         </div>
+         <div class="form-group">
+             <label class="form-control-label">Total Quantity:</label>
+             <input type="number" formControlName="totalQuantity" class="form-control" />
+             <div class="alert alert-danger" *ngIf="this.totalQuantityfc.invalid && (this.totalQuantityfc.touched || this.totalQuantityfc.dirty)">
+                 <span *ngIf="totalQuantityfc.errors.required">This field is mandate</span>
+                 <span *ngIf="totalQuantityfc.errors.minLength">Minimum 3 characters expected</span>
+         </div>
+         </div>
+         <div class="form-group">
+          <label class="form-control-label">Dispatch Date:</label>
+          <input type="datetime-local" formControlName="dispatchDate" class="form-control" />
+          <div class="alert alert-danger" *ngIf="this.dispatchDatefc.invalid && (this.dispatchDatefc.touched || this.dispatchDatefc.dirty)">
+              <span *ngIf="dispatchDatefc.errors.required">This field is mandate</span>
+              <span *ngIf="dispatchDatefc.errors.minLength">Minimum 3 characters expected</span>
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="form-control-label">Delivery Date:</label>
+        <input type="datetime-local" formControlName="deliveryDate" class="form-control" />
+        <div class="alert alert-danger" *ngIf="this.deliveryDatefc.invalid && (this.deliveryDatefc.touched || this.deliveryDatefc.dirty)">
+            <span *ngIf="deliveryDatefc.errors.required">This field is mandate</span>
+            <span *ngIf="deliveryDatefc.errors.minLength">Minimum 3 characters expected</span>
+        </div>
+    </div>
+    
+     <button class="btn btn-block btn-primary" [disabled]="orderForm.invalid">
+           Save
+         </button>
+     </form>
+  </div>

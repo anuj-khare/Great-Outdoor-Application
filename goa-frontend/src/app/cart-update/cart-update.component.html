@@ -1,0 +1,22 @@
+<div class="col-sm-6 mx-auto">
+    <h3>{{ isEditing ? "Edit" : "New"}} Cart</h3>
+     
+     <form class="form" [formGroup]="cartForm" (ngSubmit)="handleSubmit()">
+         <div class="form-group">
+             <label class="form-control-label">Cart Id:</label>
+             <input disabled type="number" formControlName="cartId" class="form-control"  />
+         </div>
+         <div class="form-group">
+             <label class="form-control-label">Total Quantity:</label>
+             <input type="number" formControlName="totalQuantity" class="form-control" />
+             <div class="alert alert-danger" *ngIf="this.totalQuantityfc.invalid && (this.totalQuantityfc.touched || this.totalQuantityfc.dirty)">
+                 <span *ngIf="totalQuantityfc.errors.required">This field is mandate</span>
+                 <span *ngIf="totalQuantityfc.errors.minLength">Minimum 3 characters expected</span>
+             </div>
+         </div>
+    
+                <button class="btn btn-block btn-primary" [disabled]="cartForm.invalid">
+             Save
+         </button>
+     </form>
+  </div>  

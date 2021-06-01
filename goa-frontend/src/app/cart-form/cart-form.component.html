@@ -1,0 +1,46 @@
+<div class="col-sm-6 mx-auto">
+    <h3>{{ isEditing ? "Edit" : "New"}} Cart</h3>
+     
+     <form class="form" [formGroup]="cartForm" (ngSubmit)="handleSubmit()">
+         <div class="form-group">
+             <label class="form-control-label">Cart Id:</label>
+             <input type="number" formControlName="cartId" class="form-control"  />
+         </div>
+         <div class="form-group">
+             <label class="form-control-label">User Id:</label>
+             <input type="text" formControlName="userId" class="form-control" />
+             <div class="alert alert-danger" *ngIf="userIdfc.invalid && (userIdfc.touched || userIdfc.dirty)">
+                 <span *ngIf="userIdfc.errors.required">This field is mandate</span>
+                 <span *ngIf="userIdfc.errors.minLength">Minimum 3 characters expected</span>
+             </div>
+         </div>
+         <div class="form-group">
+            <label class="form-control-label">Product Id:</label>
+            <input type="text" formControlName="productId" class="form-control" />
+            <div class="alert alert-danger" *ngIf="productIdfc.invalid && (productIdfc.touched || productIdfc.dirty)">
+                <span *ngIf="productIdfc.errors.required">This field is mandate</span>
+                <span *ngIf="productIdfc.errors.minLength">Minimum 3 characters expected</span>
+            </div>
+        </div>
+         <div class="form-group" >
+             <label class="form-control-label" >Cart Total Price :</label>
+             <input type="number" formControlName="cartTotalPrice" class="form-control" />
+             <div class="alert alert-danger" *ngIf="cartTotalPricefc.invalid && (cartTotalPricefc.touched || cartTotalPricefc.dirty)">
+                 <span *ngIf="cartTotalPricefc.errors.required">This field is mandate</span>
+                 <span *ngIf="cartTotalPricefc.errors.minLength">Minimum 3 characters expected</span>
+             </div>
+         </div>
+         <div class="form-group">
+             <label class="form-control-label">Total Quantity:</label>
+             <input type="number" formControlName="totalQuantity" class="form-control" />
+             <div class="alert alert-danger" *ngIf="this.totalQuantityfc.invalid && (this.totalQuantityfc.touched || this.totalQuantityfc.dirty)">
+                 <span *ngIf="totalQuantityfc.errors.required">This field is mandate</span>
+                 <span *ngIf="totalQuantityfc.errors.minLength">Minimum 3 characters expected</span>
+             </div>
+         </div>
+    
+                <button class="btn btn-block btn-primary" [disabled]="cartForm.invalid">
+             Save
+         </button>
+     </form>
+  </div>  

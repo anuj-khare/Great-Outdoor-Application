@@ -1,0 +1,43 @@
+<div class="col-sm-6 mx-auto">
+    <h3>Update Sales Report</h3>
+    <form class="form" [formGroup]="SalesReportForm" (ngSubmit)="handleSubmit()">
+        <div class="form-group">
+            <label class="form-control-label"> Salesreport ID:</label>
+            <input  type="number" formControlName="salesReportId" class="form-control" readonly>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label"> Product ID:</label>
+            <input type="number" formControlName="productId" class="form-control" readonly>
+            <div class="alert alert-danger" *ngIf="productIdfc.invalid && (productIdfc.touched || productIdfc.dirty)">
+                <span *ngIf="productIdfc.errors.required">This field is mandatory</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label"> Product Name ID:</label>
+            <input type="text" formControlName="productName" class="form-control" readonly>
+            <div class="alert alert-danger" *ngIf="productNamefc.invalid && (productNamefc.touched || productNamefc.dirty)">
+                <span *ngIf="productNamefc.errors.required">This field is mandatory</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label"> Quantity Sold</label>
+            <input type="number" formControlName="quantitySold" class="form-control">
+            <div class="alert alert-danger" *ngIf="quantitySoldfc.invalid && (quantitySoldfc.touched || quantitySoldfc.dirty)">
+                <span *ngIf="quantitySoldfc.errors.required">This field is mandatory</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label"> Total Sale</label>
+            <input type="text" formControlName="totalSale" class="form-control">
+            <div class="alert alert-danger" *ngIf="totalSalefc.invalid && (totalSalefc.touched || totalSalefc.dirty)">
+                <span *ngIf="totalSalefc.errors.required">This field is mandatory</span>
+            </div>
+        </div>
+        <button class="btn btn-block btn-primary" [disabled]="SalesReportForm.invalid">
+            Save
+        </button>
+    </form>
+</div>
+
+
+

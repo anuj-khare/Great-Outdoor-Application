@@ -1,0 +1,53 @@
+<div class="col-sm-6 mx-auto">
+    <h3> New Growth-Report</h3>
+     
+     <form class="form" [formGroup]="growthForm" (ngSubmit)="handleSubmit()">
+         <div class="form-group">
+             <label class="form-control-label">GrowthReport Id:</label>
+             <input type="number" formControlName="growthReportId" class="form-control"  />
+         </div>
+         <div class="form-group">
+             <label class="form-control-label">CurrentDate:</label>
+             <input type="datetime-local" formControlName="currentdate" class="form-control" />
+             <div class="alert alert-danger" *ngIf="currentdatefc.invalid && (currentdatefc.touched || currentdatefc.dirty)">
+                 <span *ngIf="currentdatefc.errors.required">This field is mandate</span>
+                 <span *ngIf="currentdatefc.errors.minLength">Minimum 3 characters expected</span>
+             </div>
+         </div>
+         <div class="form-group">
+             <label class="form-control-label">Revenue :</label>
+             <input type="number" formControlName="revenue" class="form-control" />
+             <div class="alert alert-danger" *ngIf="revenuefc.invalid && (revenuefc.touched || revenuefc.dirty)">
+                 <span *ngIf="revenuefc.errors.required">This field is mandate</span>
+                 <span *ngIf="revenuefc.errors.minLength">Minimum 3 characters expected</span>
+             </div>
+         </div>
+         <div class="form-group">
+             <label class="form-control-label">Amount Change:</label>
+             <input type="number" formControlName="amountChange" class="form-control" />
+             <div class="alert alert-danger" *ngIf="this.amountChangefc.invalid && (this.amountChangefc.touched || this.amountChangefc.dirty)">
+                 <span *ngIf="amountChangefc.errors.required">This field is mandate</span>
+                 <span *ngIf="amountChangefc.errors.minLength">Minimum 3 characters expected</span>
+             </div>
+         </div>
+         <div class="form-group">
+            <label class="form-control-label">Percentage Growth:</label>
+            <input type="number" formControlName="percentageGrowth" class="form-control" />
+            <div class="alert alert-danger" *ngIf="this.percentageGrowthfc.invalid && (this.percentageGrowthfc.touched || this.percentageGrowthfc.dirty)">
+                <span *ngIf="percentageGrowthfc.errors.required">This field is mandate</span>
+                <span *ngIf="percentageGrowthfc.errors.minLength">Minimum 3 characters expected</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">Color Code:</label>
+            <input type="text" formControlName="colorCode" class="form-control" />
+            <div class="alert alert-danger" *ngIf="this.colorCodefc.invalid && (this.colorCodefc.touched || this.colorCodefc.dirty)">
+                <span *ngIf="colorCodefc.errors.required">This field is mandate</span>
+                <span *ngIf="colorCodefc.errors.minLength">Minimum 3 characters expected</span>
+            </div>
+        </div>
+                <button class="btn btn-block btn-primary" [disabled]="growthForm.invalid">
+             Save
+         </button>
+     </form>
+ </div>

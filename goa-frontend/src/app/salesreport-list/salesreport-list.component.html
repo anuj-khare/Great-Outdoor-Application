@@ -1,0 +1,37 @@
+<h3> Sales Report </h3>
+<app-msg-box *ngIf = "!err && !sales">
+    <strong> loading ... please wait ...</strong>
+</app-msg-box>
+<app-msg-box *ngIf='err' [isError]="true">
+    <strong>{{ err }}</strong>
+</app-msg-box>
+<section *ngIf="sales" >
+<table class="table table-bordered table-hover table-success table-striped" >
+    <thead>
+        <tr>
+            <th>Sales Report ID</th>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Quantity Sold</th>
+            <th>Total Sale</th>
+            <th colspan="2">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let sr of sales">
+        <td>{{ sr.salesReportId }}</td>
+        <td>{{ sr.productId }}</td>
+        <td>{{ sr.productName }}</td>
+        <td>{{ sr.quantitySold }}</td>
+        <td> {{ sr.totalSale }}</td>
+        <td> <button class="btn bt-sm btn-danger" (click) ="delete(sr.salesReportId)">Delete Sales Report</button></td>
+        <td><button class="btn btn-sm btn-info" routerLink="/dashboard1/sales/salesedit/{{sr.salesReportId}}">UPDATE REPORT</button></td>
+    </tr>
+    </tbody>
+</table>
+<div class="container">
+    <div align="center">
+<button class="btn btn-lg btn-danger  "   (click)="deleteall() " >Delete All Sales Report</button><br><br>
+</div>
+</div>
+</section>

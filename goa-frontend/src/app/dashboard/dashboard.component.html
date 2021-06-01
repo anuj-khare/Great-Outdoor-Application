@@ -1,0 +1,11 @@
+<app-header1></app-header1>
+<section class="container-fluid p-4" >
+  <h4 >Welcome user! {{user}}</h4>
+
+  <app-msg-box msgType="Info" *ngIf="infoMsg">
+    {{infoMsg}}
+  </app-msg-box>
+
+  <!-- display child route component template -->
+  <router-outlet></router-outlet>
+</section>

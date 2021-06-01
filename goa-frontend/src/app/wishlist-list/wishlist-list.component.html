@@ -1,0 +1,27 @@
+
+<h3> wishlist</h3>
+<app-msg-box *ngIf="!err && !wishlist">
+    <strong>loading....please wait..</strong>
+</app-msg-box>
+<app-msg-box *ngIf="err " [isError] ="true">
+    <strong>{{ err }}</strong>
+</app-msg-box>
+<table class="table table-bordered table-hover table-success table-striped" *ngIf="wishlist">
+    <thead>
+        <tr>
+            <th (click) = "sort('wishlistId')">WishList Id&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click) = "sort('userId')">UserId&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click) = "sort('productId')">ProductId&nbsp;<i class="fa fa-sort"></i></th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let w of wishlist | orderBy: key: reverse | paginate:{itemsPerPage:10, currentPage:p}">
+            <td>{{ w.wishlistId }}</td>
+            <td>{{ w.userId }}</td>
+            <td>{{ w.productId }}</td>
+            <td><button class="btn btn-sm btn-danger" (click)="delete(w.productId)">Delete </button></td>
+        </tr>
+    </tbody>
+
+</table>

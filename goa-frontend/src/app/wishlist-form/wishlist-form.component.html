@@ -1,0 +1,25 @@
+<div class="col-sm-6 mx-auto">
+    <h3>{{isAddById ? "Add by Id in " : "Add to " }} Wishlist </h3>
+<form class="form" [formGroup]= "wishListForm" (ngSubmit)="handleSubmit()">
+    <div class="form-group">
+        <label class="form-control-label">Wishlist ID</label>
+        <input type="number" formControlName="wishlistId" class="form-control">
+    </div>
+    <div class="form-group">
+        <label class="form-control-label">userID</label>
+        <input type="text" formControlName="userId" class="form-control">
+        <div class="alert alert-danger" *ngIf="userIdfc.invalid && (userIdfc.touched || userIdfc.dirty)">
+        <span *ngIf="userIdfc.errors.required">This field is mandatory</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="form-control-label">Product ID</label>
+        <input type="text" formControlName="productId" class="form-control">
+        <div class="alert alert-danger" *ngIf="productIdfc.invalid && (productIdfc.touched || productIdfc.dirty)">
+        <span *ngIf="productIdfc.errors.required">This field is mandatory</span>
+        </div>
+    </div>
+    <button class="btn btn-block btn-primary" [disabled]="wishListForm.invalid">save</button>
+</form>
+</div>
+

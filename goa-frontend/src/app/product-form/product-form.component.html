@@ -1,0 +1,77 @@
+<div class="col-sm-6 mx-auto">
+
+    <form class="form" [formGroup]="productForm" (ngSubmit)="handleSubmit()">
+        <div class="form-group">
+            <label class="form-control-label">Product Id :</label>
+            <input type="number" formControlName="productId" class="form-control"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">Product Name :</label>
+            <input type="text" formControlName="productName" class="form-control" />
+            <div class="alert alert-danger" *ngIf="productNamefc.invalid && (productNamefc.touched || productNamefc.dirty)">
+                <span *ngIf="productNamefc.errors.required">This field is mandate</span>
+                <span *ngIf="productNamefc.errors.minLength">Minimum 3 characters expected</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">Price :</label>
+            <input type="number" formControlName="price" class="form-control" />
+            <div class="alert alert-danger" *ngIf="pricefc.invalid && (pricefc.touched || pricefc.dirty)">
+                <span *ngIf="pricefc.errors.required">This field is mandate</span>
+                <span *ngIf="pricefc.errors.minLength">Minimum 3 characters expected</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">Image :</label>
+            <input type="text" formControlName="image" class="form-control" />
+            <div class="alert alert-danger" *ngIf="this.imagefc.invalid && (this.imagefc.touched || this.imagefc.dirty)">
+                <span *ngIf="imagefc.errors.required">This field is mandate</span>
+                <span *ngIf="imagefc.errors.minLength">Minimum 3 characters expected</span>
+            </div>
+        </div>
+        <div class="form-group">
+           <label class="form-control-label">Color :</label>
+           <input type="text" formControlName="color" class="form-control" />
+           <div class="alert alert-danger" *ngIf="this.colorfc.invalid && (this.colorfc.touched || this.colorfc.dirty)">
+               <span *ngIf="colorfc.errors.required">This field is mandate</span>
+               <span *ngIf="colorfc.errors.minLength">Minimum 3 characters expected</span>
+           </div>
+       </div>
+       <div class="form-group">
+           <label class="form-control-label">Category :</label>
+           <input type="text" formControlName="category" class="form-control" />
+           <div class="alert alert-danger" *ngIf="this.categoryfc.invalid && (this.categoryfc.touched || this.categoryfc.dirty)">
+               <span *ngIf="categoryfc.errors.required">This field is mandate</span>
+               <span *ngIf="categoryfc.errors.minLength">Minimum 3 characters expected</span>
+           </div>
+       </div>
+       <div class="form-group">
+         <label class="form-control-label">Quantity :</label>
+         <input type="number" formControlName="quantity" class="form-control" />
+         <div class="alert alert-danger" *ngIf="this.quantityfc.invalid && (this.quantityfc.touched || this.quantityfc.dirty)">
+             <span *ngIf="quantityfc.errors.required">This field is mandate</span>
+             <span *ngIf="quantityfc.errors.minLength">Minimum 3 characters expected</span>
+         </div>
+     </div>
+     <div class="form-group">
+       <label class="form-control-label">Manufacturer :</label>
+       <input type="text" formControlName="manufacturer" class="form-control" />
+       <div class="alert alert-danger" *ngIf="this.categoryfc.invalid && (this.manufacturerfc.touched || this.manufacturerfc.dirty)">
+           <span *ngIf="manufacturerfc.errors.required">This field is mandate</span>
+           <span *ngIf="manufacturerfc.errors.minLength">Minimum 3 characters expected</span>
+       </div>
+   </div>
+   <div class="form-group">
+     <label class="form-control-label">Specification :</label>
+     <input type="text" formControlName="specification" class="form-control" />
+     <div class="alert alert-danger" *ngIf="this.specificationfc.invalid && (this.specificationfc.touched || this.specificationfc.dirty)">
+         <span *ngIf="specificationfc.errors.required">This field is mandate</span>
+         <span *ngIf="specificationfc.errors.minLength">Minimum 3 characters expected</span>
+     </div>
+ </div>
+ 
+        <button class="btn btn-block btn-primary" [disabled]="productForm.invalid">
+            Save
+        </button>
+    </form>
+ </div>

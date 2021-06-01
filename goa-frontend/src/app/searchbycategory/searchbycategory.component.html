@@ -1,0 +1,48 @@
+<section align="center" (click)="handleSubmit()">
+  <br>
+    <label type="text">Search :&nbsp;</label>
+   <select type="submit" class="btn btn-info" placeholder="Choose the category" [(ngModel)]="category" >
+   <option  disabled selected>Please Choose...</option>
+   <option value="Bottle">Bottle</option>
+   <option value="Jug">Jug</option>
+   <option value="Earphone">Earphone</option>
+   <option value="Mobile">Mobile</option>
+   <option value="Monitoring">Monitoring</option>
+   <option value="Washing">Washing</option>
+   <option value="Chocolate">Chocolate</option>
+  </select>
+    </section>
+ <br>
+   <section  align="center" >
+     <table class="table table-bordered table-hover table-success table-striped" *ngIf="product">
+       <thead>
+           <tr>
+               <th>Product ID</th>
+               <th>Product Name</th>
+               <th>Price</th>
+               <th>Image</th>
+               <th>Color</th>
+               <th>Category</th>
+               <th>Quantity</th>
+               <th>Manufacturer</th>
+               <th>Specification</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr *ngFor="let e of product">
+               <td>{{ e.productId}} </td>
+               <td>{{ e.productName }} </td>
+               <td>{{ e.price }} </td>
+               <td>{{ e.image }} </td>
+               <td>{{ e.color }} </td>
+               <td>{{ e.category }} </td>
+               <td>{{ e.quantity }} </td>
+               <td>{{ e.manufacturer }} </td>
+               <td>{{ e.specification }} </td>
+               </tr>
+
+ </tbody>
+     </table>
+   </section>
+
+<button type="button"  class="btn btn-primary" routerLink="/dashboard/product/productlist">BACK</button>

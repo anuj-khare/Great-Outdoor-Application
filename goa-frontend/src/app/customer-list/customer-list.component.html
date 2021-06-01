@@ -1,0 +1,45 @@
+
+<h3>Customer List</h3>
+<app-msg-box *ngIf="!err && !customer">
+    <strong>loading....please wait..</strong>
+</app-msg-box>
+<app-msg-box *ngIf="err " [isError] ="true">
+    <strong>{{ err }}</strong>
+</app-msg-box>
+<table class="table table-bordered table-hover table-success table-striped" *ngIf="customer">
+  <thead>
+      <tr>
+        <th (click) = "sort('customerId')">Customer ID&nbsp;<i class="fa fa-sort"></i></th>
+        <th >Customer Name</th>
+        <th>Mobile No</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th (click) = "sort('addressId')">AddressId&nbsp;<i class="fa fa-sort"></i></th>
+        <th>buildingName</th>
+        <th> streetNo</th>
+         <th> area </th>
+         <th>city </th>
+         <th> state </th>
+          <th>zip </th>
+          <th colspan="2">Action</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let e of customer | orderBy: key: reverse | paginate:{itemsPerPage:10, currentPage:p}">
+          <td>{{ e.customerId}} </td>
+          <td>{{ e.customerName }} </td>
+          <td>{{ e.mobileNo }} </td>
+          <td>{{ e.email }} </td>
+          <td>{{ e.role }} </td>
+          <td>{{e.address.addressId}}</td>
+          <td>{{e.address.buildingName}}</td>
+          <td>{{e.address.streetNo}}</td>
+          <td>{{e.address.area}}</td>
+          <td>{{e.address.city}}</td>
+          <td>{{e.address.state}}</td>
+          <td>{{e.address.zip}}</td>
+          <td><button class="btn btn-sm btn-danger" (click)="delete(e.customerId)">Delete</button></td>
+          <td><a class="btn btn-sm btn-info" routerLink="/dashboard/customer/customeredit/{{e.customerId}}">Edit</a></td>
+      </tr>
+  </tbody>
+</table>

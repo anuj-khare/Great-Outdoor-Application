@@ -1,0 +1,37 @@
+<section align="center">
+    <br>
+      Order Id<input type="text" placeholder="enter the category of the product"  [(ngModel)]="orderId"/>&nbsp;<br>
+      dispatchDate <input type="datetime-local" placeholder="enter the category of the product"  [(ngModel)]="dispatchDate"/>&nbsp;<br>
+      deliveryDate <input type="datetime-local" placeholder="enter the category of the product"  [(ngModel)]="deliveryDate"/>&nbsp;<br>
+     <button type="submit"  (click)="handleSubmit()">Submit</button><br>
+   </section>
+   <br>
+   <section  align="center" >
+    <table class="table table-bordered table-hover" >
+      <thead>
+          <tr>
+              <th>OrderId</th>
+              <th>UserId</th>
+              <th>Total Price</th>
+              <th>Total Quantity</th>
+              <th>Dispatch Date</th>
+              <th>Delivery Date</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let o of order">
+              <td>{{ o.orderId }} </td>
+              <td >{{ o.userId  }} </td>
+              <td>{{ o.totalPrice }} </td>
+              <td>{{ o.totalQuantity }} </td>
+              <td>{{ o.dispatchDate }} </td>
+              <td>{{ o.deliveryDate }} </td>
+            </tr>
+ 
+ </tbody>
+     </table>
+   </section>>
+   <section align="center" *ngIf="search1" align="center">
+     <h3> Invalid Product Category</h3>
+   </section>
+   <button type="button float-right" id="back"   class="btn btn-primary" routerLink="/product/productlist">BACK</button>

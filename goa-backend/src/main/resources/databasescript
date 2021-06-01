@@ -1,0 +1,238 @@
+create sequence HIBERNATE_SEQUENCE;
+	
+create table customer_entity
+(customer_id   number(19)   constraint Customer_CustomerId_pk  primary key,
+customer_name  varchar2(50) constraint Customer_CustomerName   not null,
+mobile_no      varchar2(50) constraint Customer_mobileNo_nn    not null,
+email         varchar2(50) constraint Customer_email_nn       not null,
+role          varchar2(30) constraint Customer_role_nn        not null
+);
+
+
+Alter table customer_entity Add address_id number(19);
+Alter table customer_entity Add building_name varchar2(50);
+Alter table customer_entity Add street_no varchar2(50);
+Alter table customer_entity Add area varchar2(50);
+Alter table customer_entity Add city varchar2(50);
+Alter table customer_entity Add state varchar2(50);
+Alter table customer_entity Add zip   number(19);
+
+
+
+Insert into customer_entity values (101, 'Akash','987654321','aks@gmail.com','seller',101,'A block','Alpha2','5','Modi Nagar','UP','2334123');
+Insert into customer_entity values (102, 'Prakhar','987654351','as@gmail.com','buyer',102,'B block','Alpha1','6','White Field','Bangalore','212331');
+Insert into customer_entity values (103, 'Aditya','9789071234','al@gmail.com','seller',103,'C block','Alpha1','7','Bihar','Bihar','233431');
+
+
+
+
+update customer_entity set address_id='101';
+update customer_entity set building_name='A block';
+update customer_entity set area=' great value sharnam';
+update customer_entity set street_no='street 2';
+update customer_entity set city='greater noida' ;
+update customer_entity set state='Uttar Pradesh';
+update customer_entity set zip='201306';
+
+
+
+
+create table user_data
+(user_id       number(19)   constraint UserData_userId_pk UNIQUE,
+user_name      varchar2(50) constraint UserData_userName_nn not null,
+user_type      varchar2(50) constraint UserData_userType_nn not null,
+user_password  varchar2(50) constraint UserData_userPassword_un not null );
+
+Insert into user_data(user_id,user_name,user_type,user_password)values(101,'Vikash','admin','groot');
+Insert into user_data(user_id,user_name,user_type,user_password)values(102,'Ravi','user','froot');
+Insert into user_data(user_id,user_name,user_type,user_password)values(103,'Ravi','user','frod');
+Insert into user_data(user_id,user_name,user_type,user_password)values(104,'Ravi','user','shubh');
+Insert into user_data(user_id,user_name,user_type,user_password)values(105,'Ravi','user','aditya');
+Insert into user_data(user_id,user_name,user_type,user_password)values(106,'Ravi','user','anuj');
+
+create table order_entity
+(order_id         number(19)       constraint  OrderEntity_orderId_pk           primary key,
+total_price       number(10,2)     constraint  OrderEntity_totalPrice_nn        not null,
+total_quantity    number(19)       constraint  OrderEntity_totalQuantity_nn     not null,
+dispatch_date     date             constraint  OrderEntity_dispatchDate_nn      not null,
+delivery_date     date             constraint  OrderEntity_deliveryDate_nn      not null,
+user_id           number(19)  constraint     order_entity_id_fk  REFERENCES     user_data(user_id),
+product_id       number(19)  constraint     product_entity_id_fk  REFERENCES    product_entity(product_id)
+);
+
+
+
+
+
+  
+insert into order_entity (order_id,total_price,total_quantity,dispatch_date,delivery_date,user_id,product_id) values(1,1200.0,10,'21-apr-2021','25-apr-2021',101,1);
+insert into order_entity(order_id,total_price,total_quantity,dispatch_date,delivery_date,user_id,product_id) values(2,1500.0,15,'20-apr-2021','23-apr-2021',102,2);
+insert into order_entity(order_id,total_price,total_quantity,dispatch_date,delivery_date,user_id,product_id)values(3,1600.0,80,'19-apr-2021','22-apr-2021',103,3);
+insert into order_entity(order_id,total_price,total_quantity,dispatch_date,delivery_date,user_id,product_id)values(4,1600.0,80,'19-apr-2021','22-apr-2021',104,4);
+
+
+
+
+ //Alter table order_entity drop column user_id;
+    
+ // Alter table wishlist_item_entity add constraint user_id_fk foreign key(user_id) references user_data(user_id);
+  
+---------------------------------------------------------------------------------------------------------------------------------------------
+create table cart_item_entity
+(cart_id        number(19)   constraint cartitem_cartId_pk primary key,
+cart_total_price number(10,2)  constraint  cartitem_ctp_nn not null,
+total_quantity  number(19) constraint  cartitem_tnm_nn not null,
+user_id    number(19)  constraint      cart_item_entity_id_fk  REFERENCES user_data(user_id)
+);
+
+ Alter table cart_item_entity add product_id number(19);
+ALTER TABLE product_entity
+ADD CONSTRAINT cart_item_id_fk
+  FOREIGN KEY (product_id)
+  REFERENCES product_entity(product_id);
+
+insert into cart_item_entity (cart_id,user_id,cart_total_price,total_quantity,product_id) values (1,101,2700.01,5,1);
+insert into cart_item_entity (cart_id,user_id,cart_total_price,total_quantity,product_id) values (2,102,2800.01,8,2);
+insert into cart_item_entity (cart_id,user_id,cart_total_price,total_quantity,product_id) values (3,103,2700.01,9,3);
+insert into cart_item_entity (cart_id,user_id,cart_total_price,total_quantity,product_id) values (4,104,2700.01,5,4);
+insert into cart_item_entity (cart_id,user_id,cart_total_price,total_quantity,product_id) values (5,105,2800.01,8,5);
+insert into cart_item_entity (cart_id,user_id,cart_total_price,total_quantity) values (7,106,2700.01,9,);
+
+Alter table cart_item_entity add user_id number(19);
+ALTER TABLE user_data
+ADD CONSTRAINT cart_item_entity_id_fk
+  FOREIGN KEY (user_id)
+  REFERENCES user_data(user_id);
+
+
+//Alter table cart_item_entity drop column user_id;
+
+-----------------------------------------------------------------------------------------------------------------------
+create table product_entity
+(product_id      number(19) constraint   ProductEntity_productId_pk primary key,
+product_name     varchar2(50) constraint ProductEntity_productName_nn not null,
+price            number(10,2) constraint  ProductEntity_price_nn not null,
+image            varchar2(50) constraint  ProductEntity_image_nn not null,
+color            varchar2(50) constraint  ProductEntity_color_nn not null,
+category         varchar2(50) constraint  ProductEntity_category_nn not null,
+quantity         number(19)   constraint  ProductEntity_quantity_nn not null,
+manufacturer     varchar2(50) constraint  ProductEntity_manufacturer_nn not null,
+specification    varchar2(50) constraint  ProductEntity_specification_nn not null
+);
+  
+
+Insert into product_entity(product_id,product_name,price,image,color,category,quantity,manufacturer,specification) values (1,'Cello',685.0,'png','Gold','Bottle',5,'CelloLtd','Thermosteel');
+Insert into product_entity(product_id,product_name,price,image,color,category,quantity,manufacturer,specification) values (2,'cello',750.0,'png','steel','jug',5,'CelloLtd','themo');
+Insert into product_entity(product_id,product_name,price,image,color,category,quantity,manufacturer,specification) values (3,'maruti',750.0,'png','steel','jug',5,'CelloLtd','themo');
+Insert into product_entity(product_id,product_name,price,image,color,category,quantity,manufacturer,specification) values (4,'Cello',685.0,'png','Gold','Bottle',5,'CelloLtd','Thermosteel');
+Insert into product_entity(product_id,product_name,price,image,color,category,quantity,manufacturer,specification) values (5,'cello',750.0,'png','steel','jug',5,'CelloLtd','themo');
+Insert into product_entity(product_id,product_name,price,image,color,category,quantity,manufacturer,specification) values (6,'maruti',750.0,'png','steel','jug',5,'CelloLtd','themo');
+
+
+
+Alter table product_entity add order_id number(19);
+ALTER TABLE order_entity
+ADD CONSTRAINT product_entity_id_fk
+  FOREIGN KEY (order_id)
+  REFERENCES order_entity(order_id);
+  
+  
+  Alter table product_entity add cart_id number(19);
+ALTER TABLE cart_item_entity
+ADD CONSTRAINT ProductEntity_cartId_fk
+  FOREIGN KEY (cart_id)
+  REFERENCES cart_item_entity(cart_id);
+  
+  
+  //cart_id         number(19)  constraint  ProductEntity_cartId_fk REFERENCES cart_item_entity(cart_id),
+ // order_id         number(19) constraint ProductEntity_orderId_fk REFERENCES order_entity(order_id)
+  
+  ------------------------------------------------------------------------------------------------------------------------------------------
+
+create table growth_report_entity
+(growth_report_id   number(19)    primary key,
+currentdate       TIMEStamp           not null, 
+revenue           number(10,2)  not null,
+amount_change      number(10,2)  not null ,
+percentage_growth  number(10,2)  not null,
+color_code         varchar2(50)  not null);
+
+Insert Into growth_report_entity(growth_report_id,currentdate,revenue,amount_change,percentage_growth,color_code)values(1,Date'2021-08-12',100.0,200.0,58.0,'red');
+Insert Into growth_report_entity(growth_report_id,currentdate,revenue,amount_change,percentage_growth,color_code)values(2,Date'2021-10-23',500.0,900.0,65.0,'blue');
+Insert Into growth_report_entity(growth_report_id,currentdate,revenue,amount_change,percentage_growth,color_code)values(3,Date'2021-10-23',500.0,900.0,78.0,'green');
+Insert Into growth_report_entity(growth_report_id,currentdate,revenue,amount_change,percentage_growth,color_code)values(4,Date'2021-10-23',500.0,900.0,96.0,'black');
+Insert Into growth_report_entity(growth_report_id,currentdate,revenue,amount_change,percentage_growth,color_code)values(5,Date'2021-10-23',500.0,900.0,89.0,'blue');
+Insert Into growth_report_entity(growth_report_id,currentdate,revenue,amount_change,percentage_growth,color_code)values(6,Date'2021-10-23',500.0,900.0,67.0,'purple');
+
+
+create table sales_report_entity
+(sales_report_id  number(19) constraint SalesReport_salesReportId_pk primary key,
+product_id       number(19)  constraint    product_id_fk  REFERENCES  product_entity(product_id),
+product_name     varchar2(30) constraint SalesReport_productName_nn not null,
+quantity_sold    number(10) constraint SalesReport_quantitySold_nn not null,
+total_sale      number(10,2)  constraint SalesReport_totalSale_nn not null
+);
+
+
+Insert Into sales_report_entity(sales_report_id,product_id,product_name,quantity_sold,total_sale)values(1,1,'Bottle',1200,12795.98);
+Insert Into sales_report_entity(sales_report_id,product_id,product_name,quantity_sold,total_sale)values(2,2,'Jug',1500,28974.65);
+Insert Into sales_report_entity(sales_report_id,product_id,product_name,quantity_sold,total_sale)values(3,3,'Earphone',3500,143211.43);
+Insert Into sales_report_entity(sales_report_id,product_id,product_name,quantity_sold,total_sale)values(4,4,'Trimmer',1000,12341.76);
+Insert Into sales_report_entity(sales_report_id,product_id,product_name,quantity_sold,total_sale)values(5,5,'Facewash',7000,35000.65);
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+create table wishlist_item_entity
+(wishlist_id   number(19)    constraint wishlist_wishlist_id_pk         primary key,
+product_id     varchar2(50)  not null,
+user_id        number(19)     constraint   wishlist_item_entity_id_fk        REFERENCES user_data(user_id)
+);
+
+
+Insert Into wishlist_item_entity(wishlist_id,user_id,product_id)values(101,101,'11');
+Insert Into wishlist_item_entity(wishlist_id,user_id,product_id)values(102,102,'12');
+Insert Into wishlist_item_entity(wishlist_id,user_id,product_id)values(103,103,'11');
+
+
+commit;
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+//Alter table wishlist_item_entity add user_id number(19);
+//ALTER TABLE user_data
+//ADD CONSTRAINT wishlist_item_entity_id_fk
+  //FOREIGN KEY (user_id)
+  //REFERENCES user_data(user_id);
+  
+  
+  // Alter table wishlist_item_entity add product_id number(19);
+//ALTER TABLE product_entity
+//ADD CONSTRAINT cart_item_id_fk
+  //FOREIGN KEY (product_id)
+  //REFERENCES product_entity(product_id);
+  
+  //Alter table wishlist_item_entity drop column user_id;
+
+//Alter table wishlist_item_entity add product_id number(19) constraint product_id_fk foreign key(product_id) references product_entity(product_id);
+//Alter table wishlist_item_entity add constraint user_id_fk foreign key(user_id) references user_data(user_id);
+
+--------------------------------------------------------------------------------------------------------------------------------
+drop table customer_entity;
+drop table growth_report_entity;
+drop table sales_report_entity;
+drop table product_entity;
+drop table cart_item_entity;
+drop table wishlist_item_entity;
+drop table order_entity;
+drop table user_data;
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+update cart_item_entity set product_id=1 where cart_id in(1,2);
+update cart_item_entity set product_id=2 where cart_id in(3,4);
+update cart_item_entity set product_id=3 where cart_id in(5,6);
+update cart_item_entity set product_id=4 where cart_id in(7);
+update cart_item_entity set product_id=5 where cart_id in(8,9,10);
+
